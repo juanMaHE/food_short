@@ -10,25 +10,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "alimento", schema = "app_food")
+@Table(name = "productor", schema = "app_food")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class Alimento {
+public class Productor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
+    String nombre;
+    String sexo;
+    int edad;
+    int id_contacto;
 
-    private int id_categoria;
-
-    private String descripcion;
-
-    private String imagen;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_productor")
-    Productor productor;
 }
