@@ -1,7 +1,5 @@
 package com.shortfood.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +19,8 @@ public class Productor {
     private Long id;
 
     String nombre;
+    String apPaterno;
+    String apMaterno;
     String sexo;
     int edad;
     int id_contacto;
