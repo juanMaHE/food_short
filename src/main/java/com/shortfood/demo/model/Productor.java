@@ -23,6 +23,6 @@ public class Productor {
     String apMaterno;
     String sexo;
     int edad;
-    int id_contacto;
+    int idContacto;
 
 }
