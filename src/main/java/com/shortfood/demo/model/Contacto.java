@@ -8,24 +8,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "productor", schema = "app_food")
+@Table(name = "contacto", schema = "app_food")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class Productor {
+public class Contacto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private  String nombre;
-    private  String apPaterno;
-    private  String apMaterno;
-    private  String sexo;
-    private  int edad;
-
-    @OneToOne
-    @JoinColumn(name = "id_contacto")
-    Contacto contacto;
-
+    private String telefono;
+    private String correo;
+    private String telefono2;
+    private String direccion;
+    private String referencias;
 }
