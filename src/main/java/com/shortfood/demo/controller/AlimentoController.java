@@ -15,8 +15,13 @@ import java.util.Optional;
 @RequestMapping("api/alimentos")
 public class AlimentoController {
 
-    @Autowired
     private AlimentoService alimentoService;
+
+
+    @Autowired
+    public AlimentoController(AlimentoService alimentoService) {
+        this.alimentoService = alimentoService;
+    }
 
     @PostMapping
     private ResponseEntity<Alimento> guardar(@RequestBody Alimento alimento) {
@@ -31,6 +36,11 @@ public class AlimentoController {
     @GetMapping("/obtenerAlimentos")
     private ResponseEntity<List<Alimento>> listarAlimentos() {
         return ResponseEntity.ok(alimentoService.getAllAlimentos());
+    }
+
+    @GetMapping("/obtenerAlimentosCategoria/{id}")
+    private ResponseEntity<List<Alimento>> listarAlimentosCategoria(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(alimentoService.getAllAlimentosCateoria(id));
     }
 
     @DeleteMapping

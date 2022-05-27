@@ -21,6 +21,9 @@ public class AlimentoService {
     public List<Alimento> getAllAlimentos() {
         return alimentoRepository.findAll();
     }
+    public List<Alimento> getAllAlimentosCateoria(Long id) {
+        return alimentoRepository.alimentoCategoria(id);
+    }
 
     public void delete(Alimento alimento) {
         alimentoRepository.delete(alimento);
