@@ -1,4 +1,4 @@
-package com.shortfood.demo.model;
+package com.shortfood.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "categoria", schema = "app_food")
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Builder
-public class Categoria {
+public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

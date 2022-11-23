@@ -1,36 +1,26 @@
 package com.shortfood.demo.servicio;
 
-import com.shortfood.demo.model.Alimento;
+import com.shortfood.demo.entity.Alimento;
 import com.shortfood.demo.repository.AlimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AlimentoService {
 
-    @Autowired
-    private AlimentoRepository alimentoRepository;
+    private final AlimentoRepository alimentoRepository;
 
-    public Alimento create(Alimento alimento) {
-        return alimentoRepository.save(alimento);
+    @Autowired
+    public AlimentoService(AlimentoRepository alimentoRepository) {
+        this.alimentoRepository = alimentoRepository;
     }
 
+    @Cacheable(value = "getAllAlimentos")
     public List<Alimento> getAllAlimentos() {
         return alimentoRepository.findAll();
-    }
-    public List<Alimento> getAllAlimentosCateoria(Long id) {
-        return alimentoRepository.alimentoCategoria(id);
-    }
-
-    public void delete(Alimento alimento) {
-        alimentoRepository.delete(alimento);
-    }
-
-    public Optional<Alimento> findById(Long id) {
-        return alimentoRepository.findById(id);
     }
 
 }

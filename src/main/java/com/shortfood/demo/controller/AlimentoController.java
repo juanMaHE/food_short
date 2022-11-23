@@ -1,56 +1,30 @@
 package com.shortfood.demo.controller;
 
-import com.shortfood.demo.model.Alimento;
+import com.shortfood.demo.entity.Alimento;
 import com.shortfood.demo.servicio.AlimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/alimentos")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class AlimentoController {
-
-    private AlimentoService alimentoService;
-
+    AlimentoService alimentoService;
 
     @Autowired
     public AlimentoController(AlimentoService alimentoService) {
         this.alimentoService = alimentoService;
     }
 
-    @PostMapping
-    private ResponseEntity<Alimento> guardar(@RequestBody Alimento alimento) {
-        Alimento temporal = alimentoService.create(alimento);
-        try {
-            return ResponseEntity.created(new URI("/api/alimentos" + temporal.getId())).body(temporal);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-    }
-
+    @Cacheable(value = "obtenerAlimentos")
     @GetMapping("/obtenerAlimentos")
-    private ResponseEntity<List<Alimento>> listarAlimentos() {
+    public ResponseEntity<List<Alimento>> listarAlimentos() {
         return ResponseEntity.ok(alimentoService.getAllAlimentos());
     }
 
-    @GetMapping("/obtenerAlimentosCategoria/{id}")
-    private ResponseEntity<List<Alimento>> listarAlimentosCategoria(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(alimentoService.getAllAlimentosCateoria(id));
-    }
-
-    @DeleteMapping
-    private ResponseEntity<Void> eliminarPersona(@RequestBody Alimento alimento) {
-        alimentoService.delete(alimento);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping(value = "/{id}")
-    private ResponseEntity<Optional<Alimento>> listarAlimentoporId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(alimentoService.findById(id));
-    }
 }

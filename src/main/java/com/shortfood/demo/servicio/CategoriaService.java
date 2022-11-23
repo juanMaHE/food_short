@@ -1,6 +1,6 @@
 package com.shortfood.demo.servicio;
 
-import com.shortfood.demo.model.Categoria;
+import com.shortfood.demo.entity.Categoria;
 import com.shortfood.demo.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
